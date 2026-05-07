@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anutosh Automations — Autonomous B2B Lead Generation</title>
+<meta name="description" content="AI-powered B2B lead generation systems. Autonomous SDR pipelines, waterfall enrichment, and AI chatbots that find your buyers while you sleep.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050508;--bg2:#0a0a12;--surface:#0f0f1a;--surface2:#141428;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --cyan:#00f5ff;--cyan2:#00c8d4;--magenta:#ff006e;--green:#00ff88;--orange:#ff7b00;
+  --white:#f0f0ff;--muted:#6b6b8a;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'Space Grotesk',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 20px var(--cyan);transition:transform 0.1s}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(0,245,255,0.4);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.15s ease}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 3rem;background:rgba(5,5,8,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-mono);font-size:0.9rem;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+.logo-bracket{color:var(--cyan)}
+.logo-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 8px var(--cyan)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:transparent!important;border:1px solid var(--cyan)!important;color:var(--cyan)!important;padding:0.5rem 1.25rem;border-radius:2px;transition:all 0.2s!important;font-family:var(--font-mono);font-size:0.75rem!important}
+.nav-cta:hover{background:var(--cyan)!important;color:var(--bg)!important}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 3rem 4rem;gap:4rem;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,0.03) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite}
+@keyframes gridMove{0%{background-position:0 0}100%{background-position:60px 60px}}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:orbFloat 8s ease-in-out infinite}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,245,255,0.12),transparent 70%);top:-100px;right:-100px}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(255,0,110,0.08),transparent 70%);bottom:-100px;left:10%;animation-delay:-4s}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(0,255,136,0.06),transparent 70%);top:50%;left:40%;animation-delay:-2s}
+@keyframes orbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+.hero-left{position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.75rem;font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.eyebrow-line{width:40px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+h1{font-family:var(--font-display);font-size:clamp(4rem,8vw,7rem);line-height:0.95;letter-spacing:0.02em;margin-bottom:1.5rem;text-transform:uppercase}
+h1 .line1,.line3{display:block;color:var(--white)}
+h1 .line2{display:block;background:linear-gradient(135deg,var(--cyan),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.8;max-width:440px;margin-bottom:2.5rem;font-weight:300}
+.hero-desc strong{color:var(--white);font-weight:500}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-primary{display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);padding:0.9rem 2rem;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.3s;font-family:var(--font-body);box-shadow:0 0 30px rgba(0,245,255,0.3)}
+.btn-primary:hover{box-shadow:0 0 50px rgba(0,245,255,0.5);transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.6rem;border:1px solid var(--border2);color:var(--white);padding:0.9rem 2rem;font-weight:400;font-size:0.85rem;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.3s}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+.hero-metrics{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.metric-val{font-family:var(--font-display);font-size:2.5rem;letter-spacing:0.02em;line-height:1}
+.metric-val.cyan{color:var(--cyan);text-shadow:0 0 20px rgba(0,245,255,0.4)}
+.metric-val.magenta{color:var(--magenta);text-shadow:0 0 20px rgba(255,0,110,0.4)}
+.metric-val.green{color:var(--green);text-shadow:0 0 20px rgba(0,255,136,0.4)}
+.metric-label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem;font-family:var(--font-mono)}
+.hero-right{position:relative;z-index:2}
+.terminal{background:rgba(10,10,18,0.9);border:1px solid rgba(0,245,255,0.15);border-radius:8px;overflow:hidden;box-shadow:0 0 60px rgba(0,245,255,0.08),0 40px 80px rgba(0,0,0,0.5)}
+.terminal-bar{background:rgba(255,255,255,0.04);padding:0.75rem 1rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border)}
+.t-dots{display:flex;gap:6px}
+.t-dots span{width:10px;height:10px;border-radius:50%}
+.t-dots span:nth-child(1){background:#ff5f57}
+.t-dots span:nth-child(2){background:#ffbd2e}
+.t-dots span:nth-child(3){background:#28c840}
+.t-title{font-family:var(--font-mono);font-size:0.7rem;color:var(--muted);margin-left:0.5rem;flex:1;text-align:center}
+.t-status{font-family:var(--font-mono);font-size:0.65rem;color:var(--green);display:flex;align-items:center;gap:4px}
+.t-status::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.5s infinite;box-shadow:0 0 6px var(--green)}
+.terminal-body{padding:1.25rem;font-family:var(--font-mono);font-size:0.72rem}
+.t-line{display:flex;align-items:flex-start;gap:0.75rem;margin-bottom:0.6rem;animation:termLine 0.3s ease forwards;opacity:0}
+.t-line:nth-child(1){animation-delay:0.2s}.t-line:nth-child(2){animation-delay:0.5s}.t-line:nth-child(3){animation-delay:0.8s}.t-line:nth-child(4){animation-delay:1.1s}.t-line:nth-child(5){animation-delay:1.4s}.t-line:nth-child(6){animation-delay:1.7s}.t-line:nth-child(7){animation-delay:2.0s}.t-line:nth-child(8){animation-delay:2.3s}.t-line:nth-child(9){animation-delay:2.6s}.t-line:nth-child(10){animation-delay:2.9s}.t-line:nth-child(11){animation-delay:3.2s}.t-line:nth-child(12){animation-delay:3.5s}
+@keyframes termLine{from{opacity:0;transform:translateX(-5px)}to{opacity:1;transform:translateX(0)}}
+.t-prompt{color:var(--cyan);flex-shrink:0}.t-cmd{color:var(--white)}.t-out{color:var(--muted);padding-left:1.2rem}.t-success{color:var(--green)}.t-warn{color:var(--orange)}.t-data{color:#a78bfa}.t-comment{color:#4a4a6a}
+.t-progress{margin:0.75rem 0;background:rgba(255,255,255,0.05);border-radius:2px;height:4px;overflow:hidden}
+.t-progress-bar{height:100%;background:linear-gradient(90deg,var(--cyan),var(--magenta));animation:progress 2s ease 1.5s forwards;width:0;box-shadow:0 0 10px var(--cyan)}
+@keyframes progress{to{width:100%}}
+.t-result-card{margin-top:1rem;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.15);border-radius:4px;padding:0.75rem;animation:termLine 0.5s ease 3.8s forwards;opacity:0}
+.t-result-title{color:var(--cyan);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem}
+.t-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem}
+.t-result-item{font-size:0.65rem}
+.t-result-key{color:var(--muted)}.t-result-val{color:var(--white);font-weight:500}
+.marquee-wrap{padding:1.5rem 0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.marquee-inner{display:inline-flex;gap:3rem;animation:marquee 20s linear infinite}
+.marquee-item{font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;gap:0.75rem}
+.marquee-item::before{content:'';width:4px;height:4px;background:var(--cyan);border-radius:50%;box-shadow:0 0 6px var(--cyan)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.services{padding:7rem 3rem;position:relative}
+.services::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+.section-eyebrow{font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem}
+.section-eyebrow::before{content:'//';color:var(--magenta)}
+h2{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:0.75rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:500px;line-height:1.7;font-weight:300;margin-bottom:3.5rem}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border:1px solid var(--border)}
+.service-card{background:var(--bg2);padding:2.5rem;position:relative;overflow:hidden;transition:background 0.3s}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.3s}
+.service-card:nth-child(1)::before{background:linear-gradient(90deg,var(--cyan),transparent)}
+.service-card:nth-child(2)::before{background:linear-gradient(90deg,var(--magenta),transparent)}
+.service-card:nth-child(3)::before{background:linear-gradient(90deg,var(--green),transparent)}
+.service-card:hover::before{opacity:1}
+.service-card:hover{background:var(--surface)}
+.service-num{font-family:var(--font-display);font-size:5rem;line-height:1;opacity:0.05;position:absolute;top:1rem;right:1.5rem;letter-spacing:0.05em;pointer-events:none}
+.service-icon-wrap{width:48px;height:48px;margin-bottom:1.5rem}
+.service-icon-bg{width:100%;height:100%;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.s1 .service-icon-bg{background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.2)}
+.s2 .service-icon-bg{background:rgba(255,0,110,0.1);border:1px solid rgba(255,0,110,0.2)}
+.s3 .service-icon-bg{background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.2)}
+.service-name{font-family:var(--font-display);font-size:2rem;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:0.25rem}
+.s1 .service-name{color:var(--cyan)}.s2 .service-name{color:var(--magenta)}.s3 .service-name{color:var(--green)}
+.service-tagline{font-family:var(--font-mono);font-size:0.7rem;color:var(--muted);margin-bottom:1.25rem;letter-spacing:0.05em}
+.service-price{font-family:var(--font-mono);font-size:0.8rem;margin-bottom:1.5rem;padding:0.4rem 0.8rem;display:inline-block;border-radius:2px}
+.s1 .service-price{background:rgba(0,245,255,0.08);color:var(--cyan);border:1px solid rgba(0,245,255,0.2)}
+.s2 .service-price{background:rgba(255,0,110,0.08);color:var(--magenta);border:1px solid rgba(255,0,110,0.2)}
+.s3 .service-price{background:rgba(0,255,136,0.08);color:var(--green);border:1px solid rgba(0,255,136,0.2)}
+.service-desc{font-size:0.875rem;color:#7a7a9a;line-height:1.7;font-weight:300;margin-bottom:1.5rem}
+.service-features{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.service-features li{font-size:0.775rem;color:#8888aa;display:flex;align-items:flex-start;gap:0.6rem;font-family:var(--font-mono)}
+.s1 .service-features li::before{content:'>';color:var(--cyan)}
+.s2 .service-features li::before{content:'>';color:var(--magenta)}
+.s3 .service-features li::before{content:'>';color:var(--green)}
+.workflow{padding:7rem 3rem;background:var(--surface);position:relative;overflow:hidden}
+.workflow::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,245,255,0.04),transparent 60%);pointer-events:none}
+.workflow-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.flow-diagram{display:flex;flex-direction:column;gap:0}
+.flow-node{display:flex;align-items:center;gap:1.25rem;padding:1rem 1.25rem;background:var(--bg2);border:1px solid var(--border);border-radius:6px;transition:all 0.3s}
+.flow-node:hover{border-color:rgba(0,245,255,0.3);background:rgba(0,245,255,0.03)}
+.flow-connector{width:2px;height:28px;background:linear-gradient(180deg,rgba(0,245,255,0.4),rgba(0,245,255,0.1));margin-left:calc(1.25rem + 18px);position:relative}
+.flow-connector::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid rgba(0,245,255,0.4)}
+.flow-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.fn1{background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.2)}
+.fn2{background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2)}
+.fn3{background:rgba(255,123,0,0.1);border:1px solid rgba(255,123,0,0.2)}
+.fn4{background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.2)}
+.fn5{background:rgba(255,0,110,0.1);border:1px solid rgba(255,0,110,0.2)}
+.fn6{background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.2)}
+.flow-info{flex:1}.flow-name{font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:0.15rem}
+.flow-detail{font-family:var(--font-mono);font-size:0.65rem;color:var(--muted)}
+.flow-badge{font-family:var(--font-mono);font-size:0.6rem;padding:0.2rem 0.5rem;border-radius:2px;flex-shrink:0}
+.badge-done{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2)}
+.badge-live{background:rgba(0,245,255,0.1);color:var(--cyan);border:1px solid rgba(0,245,255,0.2);animation:blink 2s infinite}
+.badge-ai{background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)}
+.portfolio{padding:7rem 3rem;position:relative}
+.portfolio::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),transparent)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:var(--border);border:1px solid var(--border);margin-top:3.5rem}
+.p-card{background:var(--bg2);overflow:hidden;position:relative;transition:background 0.3s}
+.p-card:hover{background:var(--surface)}
+.p-card-top{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.p-card:nth-child(1) .p-card-top{background:linear-gradient(135deg,#0a0a1f,#001a33)}
+.p-card:nth-child(2) .p-card-top{background:linear-gradient(135deg,#1a000d,#2d0020)}
+.p-card:nth-child(3) .p-card-top{background:linear-gradient(135deg,#001a0d,#002619)}
+.p-card:nth-child(4) .p-card-top{background:linear-gradient(135deg,#1a0d00,#2d1a00)}
+.p-glow{position:absolute;inset:0;opacity:0;transition:opacity 0.3s}
+.p-card:nth-child(1) .p-glow{background:radial-gradient(circle,rgba(0,245,255,0.1),transparent 70%)}
+.p-card:nth-child(2) .p-glow{background:radial-gradient(circle,rgba(255,0,110,0.1),transparent 70%)}
+.p-card:nth-child(3) .p-glow{background:radial-gradient(circle,rgba(0,255,136,0.1),transparent 70%)}
+.p-card:nth-child(4) .p-glow{background:radial-gradient(circle,rgba(255,123,0,0.1),transparent 70%)}
+.p-card:hover .p-glow{opacity:1}
+.p-icon{font-size:3.5rem;position:relative;z-index:1}
+.p-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);opacity:0;transition:opacity 0.3s;text-decoration:none;z-index:2}
+.p-card:hover .p-play{opacity:1}
+.p-play-btn{width:52px;height:52px;background:var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bg);font-size:1.1rem;box-shadow:0 0 30px rgba(0,245,255,0.4)}
+.p-body{padding:1.75rem}
+.p-tag{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+.p-card:nth-child(1) .p-tag{color:var(--cyan)}.p-card:nth-child(2) .p-tag{color:var(--magenta)}.p-card:nth-child(3) .p-tag{color:var(--green)}.p-card:nth-child(4) .p-tag{color:var(--orange)}
+.p-title{font-family:var(--font-display);font-size:1.5rem;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:0.5rem}
+.p-desc{font-size:0.8rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1rem}
+.p-tools{display:flex;flex-wrap:wrap;gap:0.35rem}
+.p-tool{font-family:var(--font-mono);font-size:0.6rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:#6b6b8a;padding:0.2rem 0.5rem;border-radius:2px}
+.about{padding:7rem 3rem;background:var(--surface);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;overflow:hidden}
+.about-img-wrap{aspect-ratio:3/4;background:var(--bg2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;position:relative;max-width:350px}
+.about-img-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1)}
+.about-corner{position:absolute;width:20px;height:20px;border-color:var(--cyan);border-style:solid}
+.about-corner.tl{top:8px;left:8px;border-width:2px 0 0 2px}.about-corner.tr{top:8px;right:8px;border-width:2px 2px 0 0}.about-corner.bl{bottom:8px;left:8px;border-width:0 0 2px 2px}.about-corner.br{bottom:8px;right:8px;border-width:0 2px 2px 0}
+.about-badge{position:absolute;bottom:-1rem;right:-1rem;background:rgba(10,10,18,0.95);border:1px solid rgba(0,245,255,0.2);border-radius:6px;padding:1rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(0,245,255,0.1)}
+.about-badge-num{font-family:var(--font-display);font-size:2rem;color:var(--cyan);text-shadow:0 0 20px rgba(0,245,255,0.4);line-height:1}
+.about-badge-label{font-family:var(--font-mono);font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.25rem}
+.about-wrap{position:relative}
+.about-content h2{margin-bottom:1.25rem}
+.about-content p{font-size:0.9rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem}
+.about-content p strong{color:var(--white);font-weight:500}
+.stack-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.5rem 0 2rem}
+.stack-chip{font-family:var(--font-mono);font-size:0.65rem;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15);color:var(--cyan);padding:0.3rem 0.75rem;border-radius:2px;letter-spacing:0.05em}
+.contact{padding:8rem 3rem;text-align:center;position:relative;overflow:hidden}
+.contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,245,255,0.06),transparent 60%);pointer-events:none}
+.contact::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+.contact h2{margin-bottom:1rem}
+.contact .section-sub{margin:0 auto 3rem;text-align:center}
+.contact-grid{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.c-btn{display:inline-flex;align-items:center;gap:0.6rem;padding:0.875rem 1.75rem;font-size:0.8rem;font-family:var(--font-mono);letter-spacing:0.05em;text-decoration:none;border-radius:2px;transition:all 0.3s;text-transform:uppercase}
+.c-btn.email{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);font-weight:700;box-shadow:0 0 30px rgba(0,245,255,0.2)}
+.c-btn.email:hover{box-shadow:0 0 50px rgba(0,245,255,0.4);transform:translateY(-2px)}
+.c-btn.wa{background:#25D366;color:white;font-weight:600}
+.c-btn.wa:hover{transform:translateY(-2px)}
+.c-btn.li,.c-btn.uw{border:1px solid var(--border2);color:var(--muted)}
+.c-btn.li:hover,.c-btn.uw:hover{border-color:var(--white);color:var(--white)}
+.contact-note{font-family:var(--font-mono);font-size:0.65rem;color:#3a3a5a;letter-spacing:0.05em}
+footer{padding:1.5rem 3rem;background:var(--bg);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:var(--font-mono);font-size:0.8rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+.footer-logo span{color:var(--cyan)}
+footer p{font-family:var(--font-mono);font-size:0.65rem;color:#2a2a4a}
+.reveal{opacity:0;transform:translateY(24px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:6rem 1.5rem 3rem;gap:3rem}
+  .hero-right{display:none}
+  .services,.workflow,.portfolio,.about,.contact{padding:4rem 1.5rem}
+  h1{font-size:3.5rem}h2{font-size:2.5rem}
+  .services-grid,.portfolio-grid{grid-template-columns:1fr}
+  .workflow-inner{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;gap:2rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a href="#" class="nav-logo"><span class="logo-bracket">[</span>ANUTOSH<span class="logo-bracket">]</span><span class="logo-dot"></span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#workflow">How it works</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">// Contact</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="eyebrow-line"></span>Autonomous Lead Generation · AI-Powered</div>
+    <h1><span class="line1">Your Pipeline</span><span class="line2">On Autopilot</span><span class="line3">24/7</span></h1>
+    <p class="hero-desc">I build <strong>autonomous B2B lead generation systems</strong> — AI agents that scrape buying signals, run waterfall enrichment across 6+ sources, write hyper-personalized outreach, and push verified decision-makers to your CRM daily.<br><br>No Clay required. Just results.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary"><span>Start a project</span><span>→</span></a>
+      <a href="https://www.loom.com/share/079220b564ae4718a741fe0f5ddf2bfd" target="_blank" class="btn-outline"><span>▶</span><span>Watch demo</span></a>
+    </div>
+    <div class="hero-metrics">
+      <div><div class="metric-val cyan">5★</div><div class="metric-label">Upwork rating</div></div>
+      <div><div class="metric-val magenta">$1.5k+</div><div class="metric-label">Earned</div></div>
+      <div><div class="metric-val green">7+</div><div class="metric-label">AI systems built</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dots"><span></span><span></span><span></span></div>
+        <div class="t-title">autonomous_sdr.py — running</div>
+        <div class="t-status">LIVE</div>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-prompt">❯</span><span class="t-cmd">python sdr.py --target US,CA --limit 30</span></div>
+        <div class="t-line"><span class="t-out t-comment"># Initializing signal detection...</span></div>
+        <div class="t-line"><span class="t-out">🔍 LinkedIn Jobs scan — <span class="t-success">847 signals found</span></span></div>
+        <div class="t-line"><span class="t-out">🎯 ICP filter applied — <span class="t-warn">30 high-intent matches</span></span></div>
+        <div class="t-line"><span class="t-out t-comment"># Waterfall enrichment running...</span></div>
+        <div class="t-line"><span class="t-out">📡 HarvestAPI — <span class="t-data">28/30 profiles</span></span></div>
+        <div class="t-line"><span class="t-out">📡 Dev Fusion email — <span class="t-data">26/28 verified</span></span></div>
+        <div class="t-line"><span class="t-out">📡 Fallback scrape — <span class="t-data">2/2 recovered</span></span></div>
+        <div class="t-progress"><div class="t-progress-bar"></div></div>
+        <div class="t-line"><span class="t-out">✍️ OpenAI icebreakers — <span class="t-success">30/30 written ✓</span></span></div>
+        <div class="t-line"><span class="t-out">📊 GHL CRM updated — <span class="t-success">pipeline synced ✓</span></span></div>
+        <div class="t-result-card">
+          <div class="t-result-title">// Today: 30 leads delivered</div>
+          <div class="t-result-grid">
+            <div class="t-result-item"><span class="t-result-key">Name: </span><span class="t-result-val">Sarah Mitchell</span></div>
+            <div class="t-result-item"><span class="t-result-key">Role: </span><span class="t-result-val">Head of Talent</span></div>
+            <div class="t-result-item"><span class="t-result-key">Email: </span><span class="t-result-val t-success">sarah@decagon.ai ✓</span></div>
+            <div class="t-result-item"><span class="t-result-key">Signal: </span><span class="t-result-val t-warn">Hiring Engineers</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">n8n automation</span><span class="marquee-item">AI agents</span><span class="marquee-item">waterfall enrichment</span><span class="marquee-item">GoHighLevel CRM</span><span class="marquee-item">LinkedIn scraping</span><span class="marquee-item">Apify</span><span class="marquee-item">OpenAI OpenAI</span><span class="marquee-item">Pinecone RAG</span><span class="marquee-item">Make.com</span><span class="marquee-item">Airtable</span><span class="marquee-item">autonomous SDR</span><span class="marquee-item">signal detection</span><span class="marquee-item">n8n automation</span><span class="marquee-item">AI agents</span><span class="marquee-item">waterfall enrichment</span><span class="marquee-item">GoHighLevel CRM</span><span class="marquee-item">LinkedIn scraping</span><span class="marquee-item">Apify</span><span class="marquee-item">OpenAI OpenAI</span><span class="marquee-item">Pinecone RAG</span><span class="marquee-item">Make.com</span><span class="marquee-item">Airtable</span><span class="marquee-item">autonomous SDR</span><span class="marquee-item">signal detection</span>
+  </div>
+</div>
+<section class="services" id="services">
+  <div class="section-eyebrow">What I build</div>
+  <h2>Three Systems.<br>One Outcome.</h2>
+  <p class="section-sub">Productized AI automation systems — not hourly consulting. Clear deliverables, measurable results.</p>
+  <div class="services-grid">
+    <div class="service-card s1 reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon-wrap"><div class="service-icon-bg">⚡</div></div>
+      <div class="service-name">Autonomous Lead Engine</div>
+      <div class="service-tagline">// signal detection + waterfall enrichment + AI personalization</div>
+      <div class="service-price">from $500 / month</div>
+      <p class="service-desc">Monitors LinkedIn, job boards and news for buying signals. Runs each company through 6-source waterfall enrichment. AI writes a hyper-personalized icebreaker referencing their trigger. Delivers 500+ enriched leads/month to your CRM.</p>
+      <ul class="service-features">
+        <li>Real-time buying signal detection</li>
+        <li>6-source waterfall enrichment</li>
+        <li>OpenAI icebreaker referencing their trigger</li>
+        <li>GHL / Airtable / Google Sheets delivery</li>
+        <li>Daily automated runs, zero manual work</li>
+      </ul>
+    </div>
+    <div class="service-card s2 reveal">
+      <div class="service-num">02</div>
+      <div class="service-icon-wrap"><div class="service-icon-bg">🤖</div></div>
+      <div class="service-name">AI Qualification Chatbot</div>
+      <div class="service-tagline">// 24/7 website qualification + booking + CRM sync</div>
+      <div class="service-price">from $800 + $150/mo</div>
+      <p class="service-desc">Custom AI chatbot on your website that qualifies visitors in real time, answers objections using your knowledge base (RAG), books meetings to your calendar, and pushes fully-qualified leads to your CRM automatically.</p>
+      <ul class="service-features">
+        <li>Custom AI agent on n8n + OpenAI</li>
+        <li>RAG knowledge base from your docs</li>
+        <li>Intelligent lead scoring and routing</li>
+        <li>Calendar meeting booking integration</li>
+        <li>GHL / Airtable CRM auto-sync</li>
+      </ul>
+    </div>
+    <div class="service-card s3 reveal">
+      <div class="service-num">03</div>
+      <div class="service-icon-wrap"><div class="service-icon-bg">👻</div></div>
+      <div class="service-name">Agentic SDR Pipeline</div>
+      <div class="service-tagline">// find → enrich → outreach → handle objections → book</div>
+      <div class="service-price">from $1,200 / month</div>
+      <p class="service-desc">Your fully autonomous sales development rep. Finds leads via signal detection, enriches contacts, sends AI-written email sequences, monitors inbox, handles objections autonomously, and only involves a human when a meeting is booked.</p>
+      <ul class="service-features">
+        <li>Full Lead Engine included</li>
+        <li>4-step AI-written email sequences</li>
+        <li>Autonomous reply and objection handling</li>
+        <li>Meeting booking on positive intent</li>
+        <li>Human only at meeting stage</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="workflow" id="workflow">
+  <div class="workflow-inner">
+    <div>
+      <div class="section-eyebrow">Under the hood</div>
+      <h2>How the pipeline runs</h2>
+      <p class="section-sub" style="margin-bottom:0">Every system follows a proven architecture — from signal to CRM in minutes, fully automated.</p>
+    </div>
+    <div class="flow-diagram reveal">
+      <div class="flow-node"><div class="flow-icon fn1">🔍</div><div class="flow-info"><div class="flow-name">Signal Detection</div><div class="flow-detail">LinkedIn Jobs · News · Funding · Job boards</div></div><span class="flow-badge badge-live">LIVE</span></div>
+      <div class="flow-connector"></div>
+      <div class="flow-node"><div class="flow-icon fn2">🏢</div><div class="flow-info"><div class="flow-name">Company Identification</div><div class="flow-detail">ICP filtering · Company LinkedIn URL extraction</div></div><span class="flow-badge badge-done">AUTO</span></div>
+      <div class="flow-connector"></div>
+      <div class="flow-node"><div class="flow-icon fn3">📡</div><div class="flow-info"><div class="flow-name">Waterfall Enrichment</div><div class="flow-detail">6 sources chained · 90%+ email match rate</div></div><span class="flow-badge badge-done">AUTO</span></div>
+      <div class="flow-connector"></div>
+      <div class="flow-node"><div class="flow-icon fn4">🤖</div><div class="flow-info"><div class="flow-name">AI Personalization</div><div class="flow-detail">OpenAI icebreaker · trigger-referenced</div></div><span class="flow-badge badge-ai">AI</span></div>
+      <div class="flow-connector"></div>
+      <div class="flow-node"><div class="flow-icon fn5">✉️</div><div class="flow-info"><div class="flow-name">Outreach Sequencing</div><div class="flow-detail">Gmail · 4-step sequence · reply monitoring</div></div><span class="flow-badge badge-ai">AI</span></div>
+      <div class="flow-connector"></div>
+      <div class="flow-node"><div class="flow-icon fn6">📊</div><div class="flow-info"><div class="flow-name">CRM Delivery</div><div class="flow-detail">GHL · Airtable · Google Sheets · synced</div></div><span class="flow-badge badge-done">DONE</span></div>
+    </div>
+  </div>
+</section>
+<section class="portfolio" id="portfolio">
+  <div class="section-eyebrow">Proof of work</div>
+  <h2>Built. Tested. Delivered.</h2>
+  <p class="section-sub">Real production systems — not mockups.</p>
+  <div class="portfolio-grid">
+    <div class="p-card reveal">
+      <div class="p-card-top"><div class="p-glow"></div><div class="p-icon">⚡</div><a href="https://www.loom.com/share/079220b564ae4718a741fe0f5ddf2bfd" target="_blank" class="p-play"><div class="p-play-btn">▶</div></a></div>
+      <div class="p-body"><div class="p-tag">Lead Generation · Live Demo</div><div class="p-title">Speed to Lead System</div><p class="p-desc">Form → OpenAI scores lead by urgency → instant AI-written personalized email → owner gets priority alert with sales briefing → lead auto-created in Airtable CRM. Under 60 seconds.</p><div class="p-tools"><span class="p-tool">n8n</span><span class="p-tool">OpenAI</span><span class="p-tool">Airtable</span><span class="p-tool">Gmail</span></div></div>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-card-top"><div class="p-glow"></div><div class="p-icon">🧠</div><a href="https://www.loom.com/share/a762eb78552647b4b9c4087159b4527a" target="_blank" class="p-play"><div class="p-play-btn">▶</div></a></div>
+      <div class="p-body"><div class="p-tag">AI Agent · RAG · Production</div><div class="p-title">RAG Support Agent</div><p class="p-desc">Gmail trigger → OpenAI classifier routes emails → AI agent retrieves from Pinecone knowledge base → auto-replies with threading → labels + logs. Built for Dr. Soul Academy, Japan.</p><div class="p-tools"><span class="p-tool">n8n</span><span class="p-tool">OpenAI</span><span class="p-tool">Pinecone</span><span class="p-tool">Gmail</span></div></div>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-card-top"><div class="p-glow"></div><div class="p-icon">📝</div></div>
+      <div class="p-body"><div class="p-tag">Multi-Agent · Auto-publish</div><div class="p-title">LinkedIn Content Creator</div><p class="p-desc">Form → Agent 1 (OpenAI OpenAI GPT-5 + Tavily search) writes post → Agent 2 converts to image prompt → DALL-E generates graphic → auto-publishes to LinkedIn with image. Full multi-agent chain.</p><div class="p-tools"><span class="p-tool">n8n</span><span class="p-tool">OpenAI OpenAI GPT-5</span><span class="p-tool">Tavily</span><span class="p-tool">DALL-E</span><span class="p-tool">LinkedIn API</span></div></div>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-card-top"><div class="p-glow"></div><div class="p-icon">🗺️</div><a href="https://www.loom.com/share/483c54538741434ea4cc794e49a06001" target="_blank" class="p-play"><div class="p-play-btn">▶</div></a></div>
+      <div class="p-body"><div class="p-tag">Lead Scraping · Enrichment</div><div class="p-title">B2B Google Maps Scraper</div><p class="p-desc">Apify Google Places scrapes businesses by niche and location → extracts name, address, phone, rating → cleans and maps fields → appends to Google Sheets → sends email digest on schedule.</p><div class="p-tools"><span class="p-tool">n8n</span><span class="p-tool">Apify</span><span class="p-tool">Google Sheets</span><span class="p-tool">Gmail</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="about" id="about">
+  <div class="about-wrap">
+    <div class="about-img-wrap">
+      <img src="" alt="Anutosh Raj" onerror="this.style.display='none'">
+      <div class="about-corner tl"></div><div class="about-corner tr"></div><div class="about-corner bl"></div><div class="about-corner br"></div>
+    </div>
+    <div class="about-badge"><div class="about-badge-num">5★</div><div class="about-badge-label">Upwork · All jobs</div></div>
+  </div>
+  <div class="about-content reveal">
+    <div class="section-eyebrow">Who I am</div>
+    <h2>Anutosh Raj</h2>
+    <p>I'm an automation engineer based in Jharkhand, India, operating under <strong>Anutosh Automations</strong>. I build AI-powered B2B lead generation systems and agentic automation pipelines.</p>
+    <p>My work combines <strong>signal detection, waterfall enrichment, and AI personalization</strong> to build autonomous systems that find qualified buyers — the kind of infrastructure that previously required a full SDR team.</p>
+    <p>All 5-star rated on Upwork. Production clients include Dr. Soul Academy (Japan). I build in n8n, Make.com and Zapier — with OpenAI, Pinecone, Apify, and GHL as core infrastructure.</p>
+    <div class="stack-row">
+      <span class="stack-chip">n8n</span><span class="stack-chip">Make.com</span><span class="stack-chip">OpenAI</span><span class="stack-chip">Pinecone</span><span class="stack-chip">Apify</span><span class="stack-chip">GoHighLevel</span><span class="stack-chip">Airtable</span><span class="stack-chip">Firecrawl</span><span class="stack-chip">Tavily</span><span class="stack-chip">JavaScript</span>
+    </div>
+    <a href="#contact" class="btn-primary">Work with me →</a>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="section-eyebrow" style="justify-content:center">Get in touch</div>
+  <h2>Let's Build<br>Your Pipeline</h2>
+  <p class="section-sub">Tell me your ICP and what you're trying to automate. I'll tell you exactly what I'd build and what it would cost.</p>
+  <div class="contact-grid">
+    <a href="mailto:anutoshraj2701@gmail.com" class="c-btn email">✉ anutoshraj2701@gmail.com</a>
+    <a href="https://wa.me/917631847856" target="_blank" class="c-btn wa">💬 WhatsApp</a>
+    <a href="https://www.linkedin.com/in/anutosh-automations" target="_blank" class="c-btn li">LinkedIn</a>
+    <a href="https://www.upwork.com/freelancers/~0129d44286db9d3212?mp_source=share" target="_blank" class="c-btn uw">↗ Upwork</a>
+  </div>
+  <p class="contact-note">// Jharkhand, India · Remote worldwide · Responds within 24h</p>
+</section>
+<footer>
+  <a href="#" class="footer-logo"><span>[</span>ANUTOSH AUTOMATIONS<span>]</span></a>
+  <p>© 2026 · anutoshautomations.co.in</p>
+  <p>// built with n8n + OpenAI + intention</p>
+</footer>
+<script>
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-4+'px';cursor.style.top=my-4+'px'});
+function animRing(){rx+=(mx-rx-16)*0.12;ry+=(my-ry-16)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2)';ring.style.transform='scale(1.5)';ring.style.borderColor='rgba(0,245,255,0.6)'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';ring.style.borderColor='rgba(0,245,255,0.4)'});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
