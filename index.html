@@ -157,6 +157,8 @@ h2{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);line-heigh
 .p-card:nth-child(2) .p-glow{background:radial-gradient(circle,rgba(255,0,110,0.1),transparent 70%)}
 .p-card:nth-child(3) .p-glow{background:radial-gradient(circle,rgba(0,255,136,0.1),transparent 70%)}
 .p-card:nth-child(4) .p-glow{background:radial-gradient(circle,rgba(255,123,0,0.1),transparent 70%)}
+.p-card:nth-child(5) .p-card-top{background:linear-gradient(135deg,#0d0020,#1a0035)}
+.p-card:nth-child(5) .p-glow{background:radial-gradient(circle,rgba(167,139,250,0.1),transparent 70%)}
 .p-card:hover .p-glow{opacity:1}
 .p-icon{font-size:3.5rem;position:relative;z-index:1}
 .p-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);opacity:0;transition:opacity 0.3s;text-decoration:none;z-index:2}
@@ -164,7 +166,7 @@ h2{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);line-heigh
 .p-play-btn{width:52px;height:52px;background:var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bg);font-size:1.1rem;box-shadow:0 0 30px rgba(0,245,255,0.4)}
 .p-body{padding:1.75rem}
 .p-tag{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
-.p-card:nth-child(1) .p-tag{color:var(--cyan)}.p-card:nth-child(2) .p-tag{color:var(--magenta)}.p-card:nth-child(3) .p-tag{color:var(--green)}.p-card:nth-child(4) .p-tag{color:var(--orange)}
+.p-card:nth-child(1) .p-tag{color:var(--cyan)}.p-card:nth-child(2) .p-tag{color:var(--magenta)}.p-card:nth-child(3) .p-tag{color:var(--green)}.p-card:nth-child(4) .p-tag{color:var(--orange)}.p-card:nth-child(5) .p-tag{color:#a78bfa}
 .p-title{font-family:var(--font-display);font-size:1.5rem;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:0.5rem}
 .p-desc{font-size:0.8rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1rem}
 .p-tools{display:flex;flex-wrap:wrap;gap:0.35rem}
@@ -377,6 +379,10 @@ footer p{font-family:var(--font-mono);font-size:0.65rem;color:#2a2a4a}
     <div class="p-card reveal">
       <div class="p-card-top"><div class="p-glow"></div><div class="p-icon">🗺️</div><a href="https://www.loom.com/share/483c54538741434ea4cc794e49a06001" target="_blank" class="p-play"><div class="p-play-btn">▶</div></a></div>
       <div class="p-body"><div class="p-tag">Lead Scraping · Enrichment</div><div class="p-title">B2B Google Maps Scraper</div><p class="p-desc">Apify Google Places scrapes businesses by niche and location → extracts name, address, phone, rating → cleans and maps fields → appends to Google Sheets → sends email digest on schedule.</p><div class="p-tools"><span class="p-tool">n8n</span><span class="p-tool">Apify</span><span class="p-tool">Google Sheets</span><span class="p-tool">Gmail</span></div></div>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-card-top"><div class="p-glow"></div><div class="p-icon">🎯</div><a href="https://youtu.be/cobae-Wv2yQ" target="_blank" class="p-play"><div class="p-play-btn">▶</div></a></div>
+      <div class="p-body"><div class="p-tag">Lead Gen · LinkedIn · GHL CRM</div><div class="p-title">LinkedIn Hiring Signal Pipeline</div><p class="p-desc">LinkedIn job postings scraped as buying signals → hiring companies identified → recruiter/HR contacts found via HarvestAPI → full profiles enriched via Dev Fusion → auto-created as contacts and pipeline opportunities in GoHighLevel CRM. Fully autonomous, zero manual steps.</p><div class="p-tools"><span class="p-tool">n8n</span><span class="p-tool">Apify</span><span class="p-tool">HarvestAPI</span><span class="p-tool">Dev Fusion</span><span class="p-tool">GoHighLevel</span></div></div>
     </div>
   </div>
 </section>
